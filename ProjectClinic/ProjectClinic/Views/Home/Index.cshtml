@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron homeBannerDiv">
+    <div class="homeBannerInnerDiv text-center p-5">
+        <h1 class="text-center text-white">Project MVC Clinic</h1>
+        <p class="lead">A web clinic application for our patients and doctors</p>
+        @Html.ActionLink("About Us", "About", "Home",
+            routeValues: null,
+            htmlAttributes: new { @class = "btn btn-primary btn-lg" })
+
+    </div>
+
+</div>
+
+
+<h2 class="mb-4">Quick Navigation - </h2>
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <h3>
+            @Html.ActionLink("Returning Patients", "Patients", "Home")
+    </h3>
+
+</div>
+<div class="col-md-4">
+    <h3>
+        @Html.ActionLink("Doctors", "Doctors", "Home")
+</h3>
+</div>
+
+<div class="col-md-4">
+    <!-- register not implemented yet -->
+    <h3>
+        @Html.ActionLink("Register With Our Clinic", "Register", "Account")
+</h3>
+</div>
+</div>

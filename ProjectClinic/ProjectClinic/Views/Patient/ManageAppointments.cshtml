@@ -1,0 +1,16 @@
+﻿@model ProjectClinic.Models.Patient
+
+@{
+    ViewBag.Title = "ManageAppointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Appointments</h2>
+
+@foreach (var apt in Model.Appointments)
+{
+    <tr>
+        <th>Appointment Date and time:</th>
+        <td>@apt.DateTime</td>
+    </tr>
+}

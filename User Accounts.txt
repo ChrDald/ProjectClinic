@@ -1,0 +1,17 @@
+Admin:
+admin@admin.com
+@Admin111
+
+Patient:
+patient1@patient.com
+@Patient222
+
+patient@patient.com
+@Patient111
+
+guestpatient@guest.com
+@Testing101
+
+Doctor:
+doctor@doctor.com
+@Doctor111
