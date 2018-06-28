@@ -1,0 +1,44 @@
+﻿@model List<ProjectClinic.Models.Patient>
+
+@{
+    ViewBag.Title = "ConsultProfiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Consult Patient Profiles</h2>
+
+@* maybe add a search function *@
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Ajax.ActionLink((item.FirstName + " " + item.LastName), "ViewPatientFile", "Doctor", new { id = item.Id },
+                 new AjaxOptions()
+                 {
+                     UpdateTargetId = "patientContent",
+                     InsertionMode = InsertionMode.Replace
+
+                 })
+            </td>
+        </tr>
+        <tr>
+            <td id="patientContent"></td>
+        </tr>
+    }
+</table>
+
+@section scripts
+{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+
+}

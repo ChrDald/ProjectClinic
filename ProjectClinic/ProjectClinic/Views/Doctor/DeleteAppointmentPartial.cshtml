@@ -1,0 +1,13 @@
+﻿@model ProjectClinic.Models.Appointment
+
+@using (Html.BeginForm("DeleteAppointment", "Doctor"))
+{
+    @Html.HiddenFor(m => m.Id)
+    <p class="lead">Are you sure you want to cancel the appointment?</p>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Yes</button>
+    @Html.ActionLink("No", "ManageAppointments", null, new { @class = "btn btn-primary" })
+}
+
+

@@ -42,6 +42,7 @@ namespace ProjectClinic.Models
         public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Appointment> Appointment { get; set; }
+        public DbSet<Condition> Condition { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

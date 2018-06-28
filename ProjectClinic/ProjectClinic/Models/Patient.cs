@@ -11,8 +11,12 @@ namespace ProjectClinic.Models
     {
         public int Id { get; set; }
 
+        // medical conditions
+        public List<Condition> Conditions { get; set; }
+        
         // to link with user account
         public string UserId { get; set; }
+
 
         [Required]
         [StringLength(50)]

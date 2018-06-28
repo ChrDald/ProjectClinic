@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -226,6 +227,14 @@
     <Compile Include="Migrations\201806272050013_DoctorUserIdPropertyTypeChange.Designer.cs">
       <DependentUpon>201806272050013_DoctorUserIdPropertyTypeChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806281728554_CreatedPatientFileModel.cs" />
+    <Compile Include="Migrations\201806281728554_CreatedPatientFileModel.Designer.cs">
+      <DependentUpon>201806281728554_CreatedPatientFileModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806281734374_RemovedPatientFileAddedConditionModel.cs" />
+    <Compile Include="Migrations\201806281734374_RemovedPatientFileAddedConditionModel.Designer.cs">
+      <DependentUpon>201806281734374_RemovedPatientFileAddedConditionModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -233,8 +242,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Condition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ManageAppointmentsDoctorViewModel.cs" />
     <Compile Include="ViewModels\ManageAppointmentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -393,6 +404,12 @@
     <Content Include="Views\Patient\BookAppointment.cshtml" />
     <Content Include="Views\Patient\AvailResultPartial.cshtml" />
     <Content Include="Views\Patient\DeleteAppointmentPartial.cshtml" />
+    <Content Include="Views\Doctor\ConsultProfiles.cshtml" />
+    <Content Include="Views\Doctor\PatientFilePartial.cshtml" />
+    <Content Include="Views\Doctor\ManageAppointments.cshtml" />
+    <Content Include="Views\Doctor\EditAppointmentPartial.cshtml" />
+    <Content Include="Views\Doctor\DeleteAppointmentPartial.cshtml" />
+    <Content Include="Views\Doctor\DoctorProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -427,6 +444,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806272050013_DoctorUserIdPropertyTypeChange.resx">
       <DependentUpon>201806272050013_DoctorUserIdPropertyTypeChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281728554_CreatedPatientFileModel.resx">
+      <DependentUpon>201806281728554_CreatedPatientFileModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281734374_RemovedPatientFileAddedConditionModel.resx">
+      <DependentUpon>201806281734374_RemovedPatientFileAddedConditionModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

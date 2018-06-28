@@ -1,0 +1,10 @@
+﻿@model List<ProjectClinic.Models.Condition>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <p class="lead">@item.Description</p> 
+       <br />
+    }
+}

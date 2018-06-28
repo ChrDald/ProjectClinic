@@ -125,3 +125,5 @@ C:\Users\D\Desktop\ProjectClinic\ProjectClinic\ProjectClinic\obj\Debug\ProjectCl
 C:\Users\D\Desktop\ProjectClinic\ProjectClinic\ProjectClinic\obj\Debug\ProjectClinic.Migrations.PatientDisplayNames.resources
 C:\Users\D\Desktop\ProjectClinic\ProjectClinic\ProjectClinic\obj\Debug\ProjectClinic.Migrations.PatientDOBDataChangeAgain.resources
 C:\Users\D\Desktop\ProjectClinic\ProjectClinic\ProjectClinic\obj\Debug\ProjectClinic.Migrations.DoctorUserIdPropertyTypeChange.resources
+C:\Users\D\Desktop\ProjectClinic\ProjectClinic\ProjectClinic\obj\Debug\ProjectClinic.Migrations.CreatedPatientFileModel.resources
+C:\Users\D\Desktop\ProjectClinic\ProjectClinic\ProjectClinic\obj\Debug\ProjectClinic.Migrations.RemovedPatientFileAddedConditionModel.resources
