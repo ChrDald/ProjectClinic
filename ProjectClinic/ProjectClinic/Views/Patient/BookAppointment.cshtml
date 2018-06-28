@@ -1,0 +1,112 @@
+﻿@model ProjectClinic.Models.Appointment
+
+@{
+    ViewBag.Title = "BookAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Book an Appointment</h2>
+
+@using (Html.BeginForm("SaveAppointment", "Patient"))
+{
+    <p class="lead">
+        Select a date for your appointment
+    </p>
+
+    <div class="form-group">
+        @Html.LabelFor(apt => apt.DateTime)
+
+        @Html.EditorFor(apt => apt.DateTime, new { htmlAttributes = new { @class = "form-control", placeholder = "Select an Appointment Date", @readonly = "true", @id = "datePicker" } })
+
+        @Html.ValidationMessageFor(apt => apt.DateTime)
+
+        @Html.AntiForgeryToken()
+
+    </div>
+
+
+    @*
+    // on success, enable "Book Now" button
+    @Ajax.ActionLink("Check Availability", "CheckAppointmentAvail", "Patient", 
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "content",
+                        InsertionMode = InsertionMode.Replace
+
+                        /*
+                        OnSuccess = "updateContentSuccess", // function to display "Available" in the content paragraph
+                        OnFailure = "updateContentFail" // not 100% this works that way
+                        */
+                    })
+        *@
+    <a class="btn btn-primary" id="btnCheck" style="color:white">Check if Available</a>
+
+    <p class="lead" id="message" style="display:inline"></p>
+
+    <br />
+    <button type="submit" id="btnSubmit" class="btn btn btn-primary mt-2" disabled="disabled">Book Now</button>
+}
+
+
+
+@section scripts
+{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#btnSubmit").prop("disabled", true);
+            $('input[type=datetime]').datetimepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+            $("#btnCheck").click(function () {
+                CheckAvailability();
+            });
+
+
+
+
+            // function to check if available time is taken
+            // (if theres an appointment in database with the same DateTime value)
+            function CheckAvailability() {
+                var dateInput = $("#datePicker").datepicker({ dateFormat: 'yyyy-mm-dd' }).val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Patient/CheckAppointmentAvail",
+                    data: '{aptTime: "' + dateInput + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var message = $("#message");
+                        if (response) {
+                            //Email available.
+                            message.css("color", "green");
+                            message.html("Timeslot is available");
+                            $("#btnSubmit").prop("disabled", false);
+                        }
+                        else {
+                            //Email not available.
+                            message.css("color", "red");
+                            message.html("Timeslot is NOT available");
+                        }
+                    }
+                });
+            };
+        });
+    </script>
+    
+}

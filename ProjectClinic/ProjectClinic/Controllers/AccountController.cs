@@ -175,6 +175,7 @@ namespace ProjectClinic.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     
+                    // FOR PATIENTS
                     // new accounts can only be in Patient role 
                     // (only admins should add doctor accounts)
                     var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
@@ -195,13 +196,29 @@ namespace ProjectClinic.Controllers
                     };
                     context.Patient.Add(patient);
                     context.SaveChanges();
-
+                    
+                    
                     /*
+                     // FOR DOCTORS
                     var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     var roleManager = new RoleManager<IdentityRole>(roleStore);
                     await roleManager.CreateAsync(new IdentityRole("Doctor"));
                     await UserManager.AddToRoleAsync(user.Id, "Doctor");
+
+                    Doctor doctor = new Doctor
+                    {
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Phone = model.Phone,                       
+                        UserId = user.Id
+                        
+                    };
+
+                    context.Doctor.Add(doctor);
+                    context.SaveChanges();
                     */
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

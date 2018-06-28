@@ -10,8 +10,8 @@ namespace ProjectClinic.Models
     {
         public int Id { get; set; }
 
-        // authentication id
-        public int UserId { get; set; }
+        // to link with user account
+        public string UserId { get; set; }
 
         [Required]
         [StringLength(50)]

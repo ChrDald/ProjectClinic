@@ -5,5 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Welcome Dr.@Model.FirstName</h2>
+<h2>Welcome Dr. @Model.LastName</h2>
 
+<h3>What would you like to do today?</h3>
+
+<div class="list-group">
+
+    @Html.ActionLink("View My Profile", "PatientProfile", "Doctor", null, new { @class = "list-group-item list-group-item-action" })
+    @Html.ActionLink("Manage My Appointments", "ManageAppointments", "Doctor", null, new { @class = "list-group-item list-group-item-action" })
+    @Html.ActionLink("Consult Patient Profiles", "ConsultProfiles", "Doctor", null, new { @class = "list-group-item list-group-item-action" })
+
+
+    @* Since the LogOff method is a Post method (for minor security reasons apparently)
+        a post request is necessary to link to the action
+    *@
+
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item list-group-item-action">Log off</a>
+    }
+
+
+</div>

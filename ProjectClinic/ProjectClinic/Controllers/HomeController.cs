@@ -49,10 +49,20 @@ namespace ProjectClinic.Controllers
             
         }
 
-        [Authorize(Roles ="Doctor")]
+        [Authorize(Roles = "Doctor")]
         public ActionResult Doctors()
         {
-            return View();
+            if (User.IsInRole("Doctor"))
+            {
+                string currentUserId = User.Identity.GetUserId();
+
+                Doctor doctor = (from d in context.Doctor where d.UserId == currentUserId select d).SingleOrDefault();
+                return View(doctor);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
     }

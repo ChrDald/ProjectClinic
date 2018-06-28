@@ -1,5 +1,4 @@
-﻿@model ProjectClinic.Models.Patient
-
+﻿@model List<ProjectClinic.ViewModels.ManageAppointmentsViewModel>
 @{
     ViewBag.Title = "ManageAppointments";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,10 +6,89 @@
 
 <h2>Manage Appointments</h2>
 
-@foreach (var apt in Model.Appointments)
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            @foreach (var item in Model)
+            {
+                <table class="table-bordered">
+
+                    <tr>
+                        <th>Appointment Date and time</th>
+                        <td>@item.Appointment.DateTime</td>
+                    </tr>
+                    <tr>
+                        <th>Doctor Name</th>
+                        <td>@item.DoctorName</td>
+                    </tr>
+                </table>
+
+                @*
+            @Html.ActionLink("Edit Appointment", "EditAppointment", new { id = item.Appointment.Id }, new { @class = "btn btn-info m-2" })
+            @Html.ActionLink("Cancel Appointment", "CancelAppointment", new { id = item.Appointment.Id }, new { @class = "btn btn-danger m-2" })
+                *@
+                @Ajax.ActionLink("Edit Appointment", "EditAppointment", "Patient", new { id = item.Appointment.Id },
+                    new AjaxOptions()
+                    {
+                       UpdateTargetId = "contentEdit",
+                       InsertionMode = InsertionMode.Replace
+
+                   })
+                @Ajax.ActionLink("Cancel Appointment", "CancelAppointment", "Patient", new { id = item.Appointment.Id },
+                    new AjaxOptions()
+                    {
+                        UpdateTargetId = "contentDelete",
+                        InsertionMode = InsertionMode.Replace
+
+                    })
+                // content replaced when cancel appointment is pressed
+                <div id="contentDelete"></div>
+                <hr />
+            }
+        </div>
+        <div class="col-6">
+            @* contents of this div are replaced when an edit button is pressed *@
+            <div id="contentEdit"></div>
+        </div>
+    </div>
+</div>
+
+
+    @Html.ActionLink("Book an Appointment", "BookAppointment", null, new { @class = "btn btn-primary" })
+
+
+<div id="content">
+
+</div>
+
+
+    
+@section scripts
 {
-    <tr>
-        <th>Appointment Date and time:</th>
-        <td>@apt.DateTime</td>
-    </tr>
+    
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+    
+        
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+
+    
+    @*
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+        });
+    </script>
+      *@  
 }
+    
