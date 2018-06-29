@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    table th, td {
+        padding: 10px;
+    }
+</style>
+
+
 <h2>Manage Appointments</h2>
 
 <div class="container-fluid">
@@ -23,22 +30,31 @@
                     </tr>
                 </table>
 
+                 
+                string divId = item.Appointment.Id + "";
+                
                 @Ajax.ActionLink("Edit Appointment", "EditAppointment", "Doctor", new { id = item.Appointment.Id },
                     new AjaxOptions()
                     {
-                        UpdateTargetId = "contentEdit",
+                        UpdateTargetId = divId,
                         InsertionMode = InsertionMode.Replace
 
-                    })
+                    },
+                    new { @class = "btn btn-info mr-2 mt-2" }
+                    )
                 @Ajax.ActionLink("Cancel Appointment", "CancelAppointment", "Doctor", new { id = item.Appointment.Id },
                     new AjaxOptions()
                     {
-                        UpdateTargetId = "contentDelete",
+                        UpdateTargetId = divId,
                         InsertionMode = InsertionMode.Replace
 
-                    })
+                    },
+                    new { @class = "btn btn-info mt-2" }
+                    )
                 // content replaced when cancel appointment is pressed
-                <div id="contentDelete"></div>
+                // use a razor variable to set the id, then specify that in the ajax above (so you get dynamic unique ids)
+                <div id="@divId"></div>
+              
                 <hr />
             }
         </div>

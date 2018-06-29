@@ -2,6 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
+<style>
+    .bookingLineContainer {
+        /*border: 1px solid rgba(177, 192, 206, 0.9);*/
+        /*background-color: rgba(24, 24, 66, 0.7); */
+        color: white;
+        /*color: rgba(74, 74, 75, 0.8); */
+        padding: 1%;
+        /*background-color: #0d205f; */
+        /*opacity: 0.75; */
+        position: relative;
+    }
+    .bookingLineP {
+        padding: 1%;
+    }
+
+    
+    #bookingBackground {
+        width: 100%;
+    }
+  
+    .textContainer {
+        position: absolute;
+        top: 50%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+    }
+
+    /*
+    .thumbnail {
+        position: relative;
+        width: 100%;
+    }
+
+    .caption {
+        position: absolute;
+        top: 45%;
+        left: 40%;
+    }
+        */
+</style>
+
+
+
 <div class="jumbotron homeBannerDiv">
     <div class="homeBannerInnerDiv text-center p-5">
         <h1 class="text-center text-white">Project MVC Clinic</h1>
@@ -11,29 +54,99 @@
             htmlAttributes: new { @class = "btn btn-primary btn-lg" })
 
     </div>
+</div>
+
+
+<div class="container-fluid bookingLineContainer">
+
+    
+        <img src="~/Images/Receptionist.png" class="img-fluid" id="bookingBackground" alt="Receptionist" />
+        
+        <div class="textContainer" id="testId">
+            <h2 class="text-center">Don't have an account with us?</h2>
+
+            <div class="text-center">
+                <h4 class="text-center d-inline-block bookingLineP">
+                    <i class="fas fa-phone-volume"></i> Appointment Booking Line: <br />1-888-999-0221</h4>
+            </div>
+        </div>
+
+</div>
+
+<div id="smallDeviceDiv"></div>
+
+<div class="container-fluid mt-4">
+    <h3 class="text-center"><small class="text-muted">Quick Navigation</small></h3>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/Login">Patient Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Home/About">Our Services</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/Login">Doctor Login</a>
+        </li>
+
+    </ul>
 
 </div>
 
 
-<h2 class="mb-4">Quick Navigation - </h2>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jquery")
 
-<div class="row text-center">
-    <div class="col-md-4">
-        <h3>
-            @Html.ActionLink("Returning Patients", "Patients", "Home")
-    </h3>
 
-</div>
-<div class="col-md-4">
-    <h3>
-        @Html.ActionLink("Doctors", "Doctors", "Home")
-</h3>
-</div>
 
-<div class="col-md-4">
-    <!-- register not implemented yet -->
-    <h3>
-        @Html.ActionLink("Register With Our Clinic", "Register", "Account")
-</h3>
-</div>
-</div>
+
+    <script type="text/javascript">
+
+        
+        $(document).ready(function () {
+
+            // script below is just for the layout of the text over image
+            // it wasnt displaying properly on small screens
+
+            // on window load check window width
+            var width = $(window).width();
+            var containerContent = $(".textContainer").html();
+
+            if ((width <= 769)) {
+                smallDeviceContent();
+            }
+            else {
+                regularDeviceContent();
+            }
+
+            // in case the window resizes
+            $(window).resize(function () {
+                var width = $(window).width();
+
+                if ((width <= 769)) {
+                    smallDeviceContent();
+                }
+                else {
+                    regularDeviceContent();
+                }
+            });
+
+            function smallDeviceContent() { 
+                $(".textContainer").empty();
+                $("#smallDeviceDiv").html(containerContent);
+                $("#testId").css("position", "initial");
+                $("#testId").css("color", "black");              
+            }
+            function regularDeviceContent() {
+                $("#smallDeviceDiv").empty();
+                $(".textContainer").html(containerContent);
+
+                $("#testId").css("position", "absolute");
+                $("#testId").css("color", "white");
+            }
+        });
+        
+    </script>
+
+}
